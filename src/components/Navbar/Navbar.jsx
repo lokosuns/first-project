@@ -1,6 +1,7 @@
 import React from "react";
 import classes from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
+import {Box} from "@mui/material";
 
 export const SelectedLink = () => {
     return (
@@ -8,9 +9,31 @@ export const SelectedLink = () => {
     );
 }
 
-const Navbar = () => {
+export const SidebarFriend = (props) => {
+    return (
+        <div>
+            <img
+                src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxLkbtTa0kfmKizxJgqECQLdlt_xq1R2jEQQ&usqp=CAU'}
+                alt={''} width={40}/>
+            <p>{props.name}</p>
+        </div>
+    );
+}
+
+export const MySidebarFriend = (props) => {
+    let elementSidebarFriend = props.friendsData.map(el => <SidebarFriend name={el.name}/>)
+    return (
+        <div>
+            {elementSidebarFriend}
+        </div>
+    )
+}
+
+
+export const Navbar = (props) => {
 
     return (
+
         <nav className={classes.nav}>
             <div>
                 <NavLink to={'/profile'} className={SelectedLink()}>Profile</NavLink>
@@ -27,8 +50,14 @@ const Navbar = () => {
             <div>
                 <NavLink to={'/settings'} className={SelectedLink()}>Settings</NavLink>
             </div>
+
+            <Box mt={2} backgroundColor={'white'} flexWrap={"nowrap"}>
+                <div>
+                    <p>Friends</p>
+                    <MySidebarFriend friendsData={props.state.friendsData}/>
+                </div>
+            </Box>
         </nav>
     )
 }
 
-export default Navbar
