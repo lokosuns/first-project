@@ -1,11 +1,9 @@
 import classes from './News.module.css'
 
-const News = (props) => {
+export const News = (props) => {
     return (
         <div>
             News
         </div>
     )
 }
-
-export default News

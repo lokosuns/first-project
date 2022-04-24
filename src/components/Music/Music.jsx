@@ -1,6 +1,6 @@
 import classes from './Music.module.css'
 
-const Music = (props) => {
+export const Music = (props) => {
     return (
         <div>
             Music
@@ -8,4 +8,4 @@ const Music = (props) => {
     )
 }
 
-export default Music
+// export Music
