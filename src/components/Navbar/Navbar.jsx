@@ -3,13 +3,13 @@ import classes from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 import {Box} from "@mui/material";
 
-export const SelectedLink = () => {
+const SelectedLink = () => {
     return (
         navData => navData.isActive ? classes.active : classes.item
     );
 }
 
-export const SidebarFriend = (props) => {
+const SidebarFriend = (props) => {
     return (
         <div>
             <img
@@ -17,10 +17,10 @@ export const SidebarFriend = (props) => {
                 alt={''} width={40}/>
             <p>{props.name}</p>
         </div>
-    );
+    )
 }
 
-export const MySidebarFriend = (props) => {
+const MySidebarFriend = (props) => {
     let elementSidebarFriend = props.friendsData.map(el => <SidebarFriend name={el.name}/>)
     return (
         <div>
@@ -29,11 +29,9 @@ export const MySidebarFriend = (props) => {
     )
 }
 
-
 export const Navbar = (props) => {
 
     return (
-
         <nav className={classes.nav}>
             <div>
                 <NavLink to={'/profile'} className={SelectedLink()}>Profile</NavLink>
@@ -54,7 +52,7 @@ export const Navbar = (props) => {
             <Box mt={2} backgroundColor={'white'} flexWrap={"nowrap"}>
                 <div>
                     <p>Friends</p>
-                    <MySidebarFriend friendsData={props.state.friendsData}/>
+                    <MySidebarFriend friendsData={props.friendsData}/>
                 </div>
             </Box>
         </nav>

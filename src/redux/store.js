@@ -1,6 +1,6 @@
-import {profileReduser} from "./profile-reduser";
-import {dialogsReduser} from "./dialogs-reduser";
-import {sidebarReduser} from "./sidebar-reduser";
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
+import {sidebarReducer} from "./sidebar-reducer";
 
 let store = {
     _state: {
@@ -11,7 +11,7 @@ let store = {
             ],
             newPostText: 'Lokomotiv',
         },
-        messagePage: {
+        dialogsPage: {
             dialogData: [
                 {id: 1, name: 'Alex'},
                 {id: 2, name: 'Max'},
@@ -60,9 +60,9 @@ let store = {
 
     dispatch(action) {
 
-        this._state.profilePage = profileReduser(this._state.profilePage, action);
-        this._state.messagePage = dialogsReduser(this._state.messagePage, action);
-        this._state.sidebarPage = sidebarReduser(this._state.sidebarPage, action);
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebarPage = sidebarReducer(this._state.sidebarPage, action);
         this._callSubscriber(this._state);
 
     },
