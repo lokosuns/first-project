@@ -21,7 +21,7 @@ const SidebarFriend = (props) => {
 }
 
 const MySidebarFriend = (props) => {
-    let elementSidebarFriend = props.friendsData.map(el => <SidebarFriend name={el.name}/>)
+    let elementSidebarFriend = props.friendsData.map(el => <SidebarFriend name={el.name} key={el.id}/>)
     return (
         <div>
             {elementSidebarFriend}
