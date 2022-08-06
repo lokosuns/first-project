@@ -48,6 +48,9 @@ export const Navbar = (props) => {
             <div>
                 <NavLink to={'/settings'} className={SelectedLink()}>Settings</NavLink>
             </div>
+            <div>
+                <NavLink to={'/users'} className={SelectedLink()}>Users</NavLink>
+            </div>
 
             <Box mt={2} backgroundColor={'white'} flexWrap={"nowrap"}>
                 <div>
