@@ -3,7 +3,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT'
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_LOADING = 'TOGGLE_IS_LOADING'
 
 let initialState = {
     users: [],
@@ -49,7 +49,7 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state, usersPageCount: action.count
             }
-        case TOGGLE_IS_FETCHING:
+        case TOGGLE_IS_LOADING:
             return {
                 ...state, isLoading: action.isLoading
             }
@@ -79,7 +79,7 @@ export const setTotalUsersCount = (totalUsersCount) => ({
 })
 
 export const toggleIsLoading = (isLoading) => ({
-    type: TOGGLE_IS_FETCHING, isLoading
+    type: TOGGLE_IS_LOADING, isLoading
 })
 
 export default usersReducer;
