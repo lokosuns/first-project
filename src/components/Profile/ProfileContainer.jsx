@@ -4,31 +4,31 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {setUserProfile} from "../../redux/profile-reducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-//
-// function withRouter(Component) {
-//     function ComponentWithRouterProps(props) {
-//         let location = useLocation();
-//         let navigate = useNavigate();
-//         let params = useParams();
-//         return (
-//             <Component
-//                 {...props}
-//                 router = {{location, navigate, params}}
-//                 />
-//         )
-//     }
-//     return ComponentWithRouterProps;
-// }
+
+function withRouter(Component) {
+    function ComponentWithRouterProps(props) {
+        let location = useLocation();
+        let navigate = useNavigate();
+        let params = useParams();
+        return (
+            <Component
+                {...props}
+                router = {{location, navigate, params}}
+                />
+        )
+    }
+    return ComponentWithRouterProps;
+}
 
 
  // Декоратор для замены HOC withRouter, т.к. в react-route-dom 6 его уже нет.
  // В дальнейшем при замене классовой компоненты на функциональную, нужно будет использовать только хуки.
-function withRouter(Children) {
-    return (props) => {
-        const match = {params: useParams()};
-        return <Children {...props} match={match}/>
-    }
-}
+// function withRouter(Children) {
+//     return (props) => {
+//         const match = {params: useParams()};
+//         return <Children {...props} match={match}/>
+//     }
+// }
 
 class ProfileContainer extends React.Component {
 
