@@ -4,7 +4,7 @@ import {
     follow,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowingInProgress,
     toggleIsLoading,
     unfollow
 } from "../../redux/users-reducer";
@@ -29,11 +29,11 @@ class UsersContainer extends React.Component {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsLoading(true);
 
-        usersAPI.getUsers((pageNumber, this.props.pageSize)
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
             .then(data => {
                 this.props.toggleIsLoading(false);
                 this.props.setUsers(data.items);
-            }))
+            })
     }
 
     render() {
@@ -50,6 +50,8 @@ class UsersContainer extends React.Component {
                     users={this.props.users}
                     unfollow={this.props.unfollow}
                     follow={this.props.follow}
+                    toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+                    followingInProgress={this.props.followingInProgress}
                 />}
             </>
         )
@@ -63,6 +65,7 @@ let mapStateToProps = (state) => {
         usersPageCount: state.usersPage.usersPageCount,
         currentPage: state.usersPage.currentPage,
         isLoading: state.usersPage.isLoading,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
@@ -96,4 +99,5 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     setTotalUsersCount,
     toggleIsLoading,
+    toggleFollowingInProgress,
 })(UsersContainer)
