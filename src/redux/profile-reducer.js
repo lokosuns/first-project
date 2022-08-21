@@ -1,8 +1,10 @@
-import {usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_USER_STATUS = 'SET_USER_STATUS';
+const UPDATE_USER_STATUS = 'UPDATE_USER_STATUS';
 
 let initialState = {
     postData: [
@@ -11,6 +13,7 @@ let initialState = {
     ],
     newPostText: 'Lokomotiv',
     profile: null,
+    status: 'Hello',
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -34,6 +37,14 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state, profile: action.profile
             }
+        case SET_USER_STATUS:
+            return {
+                ...state, status: action.status
+            }
+        case UPDATE_USER_STATUS:
+            return {
+                ...state, status: action.status
+            }
         default:
             return state;
     }
@@ -43,10 +54,29 @@ export const addPostActionCreator = () => ({type: ADD_POST})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const updateNewPostTextActionCreator = (text) =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const setUserStatus = (status) => ({type: SET_USER_STATUS, status})
 
+
+// Thunk
 export const getUserProfile = (userId) => (dispatch) => {
-    usersAPI.getUserProfile(userId)
-            .then(data => {
+    profileAPI.getUserProfile(userId)
+        .then(data => {
             dispatch(setUserProfile(data));
+        })
+}
+
+export const getUserStatus = (userId) => (dispatch) => {
+    profileAPI.getUserStatus(userId)
+        .then(data => {
+            dispatch(setUserStatus(data));
+        })
+}
+
+export const updateUserStatus = (status) => (dispatch) => {
+    profileAPI.updateUserStatus(status)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setUserStatus(status));
+            }
         })
 }
