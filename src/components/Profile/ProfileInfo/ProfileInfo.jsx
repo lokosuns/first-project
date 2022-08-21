@@ -4,6 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import Background from '../../../assets/images/background.jpg'
 import UserPhoto from '../../../assets/images/users.svg'
 import {Box, Grid, Typography} from "@mui/material";
+import {ProfileStatus} from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
     const {profile} = props
@@ -14,14 +15,15 @@ const ProfileInfo = (props) => {
 
     return (
         <div>
-            <div>
-                <img alt={''} src={Background} width={'1000px'}/>
-            </div>
+            {/*<div>*/}
+            {/*    <img alt={''} src={Background} width={'1000px'}/>*/}
+            {/*</div>*/}
             <Box>
                 <Typography variant={'h2'}>
                     {profile.fullName}
                 </Typography>
             </Box>
+            <ProfileStatus status={'Hello'}/>
             <Grid container>
 
                 <Box className={classes.descriptionBlock}>

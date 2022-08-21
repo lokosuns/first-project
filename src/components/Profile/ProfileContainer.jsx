@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile-reducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 // Декоратор для замены HOC withRouter, т.к. в react-route-dom 6 его уже нет.
 // В дальнейшем при замене классовой компоненты на функциональную, нужно будет использовать только хуки.
@@ -36,8 +37,6 @@ class ProfileContainer extends React.Component {
 
     render() {
 
-
-
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         )
@@ -50,6 +49,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-
-export default connect(mapStateToProps, {getUserProfile})(withRouter(AuthRedirectComponent));
+export default compose(
+    connect(mapStateToProps, {getUserProfile}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer);
