@@ -34,7 +34,7 @@ export const Navbar = (props) => {
     return (
         <nav className={classes.nav}>
             <div>
-                <NavLink to={'/profile'} className={SelectedLink()}>Profile</NavLink>
+                <NavLink to={'/profile/25432'} className={SelectedLink()}>Profile</NavLink>
             </div>
             <div>
                 <NavLink to={'/dialogs'} className={SelectedLink()}>Message</NavLink>
