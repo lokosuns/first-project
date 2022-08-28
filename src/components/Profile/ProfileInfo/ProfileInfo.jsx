@@ -14,9 +14,6 @@ const ProfileInfo = (props) => {
 
     return (
         <div>
-            {/*<div>*/}
-            {/*    <img alt={''} src={Background} width={'1000px'}/>*/}
-            {/*</div>*/}
             <Box>
                 <Typography variant={'h2'}>
                     {profile.fullName}
