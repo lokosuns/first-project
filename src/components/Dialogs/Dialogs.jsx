@@ -5,6 +5,10 @@ import React from "react";
 import {Navigate} from "react-router-dom";
 import Field from "redux-form/lib/Field";
 import ReduxForm from "redux-form/lib/reduxForm";
+import {TextArea} from "../common/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
+
+const maxLength30 = maxLengthCreator(30)
 
 const Dialogs = (props) => {
 
@@ -46,7 +50,8 @@ const AddMessageForm = (props) => {
                 <Field
                     placeholder={'Enter your message'}
                     name={'newMessageBody'}
-                    component={'textarea'}
+                    component={TextArea}
+                    validate={[required, maxLength30]}
                 />
             </div>
             <div>
