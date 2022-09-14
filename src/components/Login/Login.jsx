@@ -6,6 +6,7 @@ import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Navigate} from "react-router-dom";
+import styles from "./Login.module.css"
 
 const Login = (props) => {
 
@@ -50,6 +51,9 @@ const LoginForm = (props) => {
             <div>
                 <button>Login</button>
             </div>
+            {props.error && <div className={styles.formSummaryError}>
+                {props.error}
+            </div>}
         </form>
     )
 }
