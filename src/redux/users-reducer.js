@@ -98,10 +98,11 @@ export const toggleFollowingInProgress = (isLoading, userId) => ({
 })
 
 // ThunkCreator обернут вокруг Thunk
-export const getUsers = (currentPage, pageSize) => (dispatch) => {
+export const requestUsers = (page, pageSize) => (dispatch) => {
     dispatch(toggleIsLoading(true));
+    dispatch(setCurrentPage(page));
 
-    usersAPI.getUsers(currentPage, pageSize)
+    usersAPI.getUsers(page, pageSize)
         .then(data => {
             dispatch(toggleIsLoading(false));
             dispatch(setUsers(data.items));
