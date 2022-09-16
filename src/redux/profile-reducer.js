@@ -4,6 +4,7 @@ const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const UPDATE_USER_STATUS = 'UPDATE_USER_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 let initialState = {
     postData: [
@@ -20,7 +21,7 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postData: [...state.postData, {
-                    id: 3,
+                    id: state.postData.length + 1,
                     message: action.newPostText,
                     likesCount: 0,
                 }]
@@ -37,15 +38,20 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state, status: action.status
             }
+        case DELETE_POST:
+            return {
+                ...state,
+                postData: state.postData.filter(post => post.id !== action.postId)
+            }
         default:
             return state;
     }
 }
 
-export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText})
+export const addPost = (newPostText) => ({type: ADD_POST, newPostText})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status})
-
+export const deletePost = (postId) => ({type: DELETE_POST, postId})
 
 // Thunk
 export const getUserProfile = (userId) => (dispatch) => {
