@@ -3,7 +3,7 @@ import classes from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import UserPhoto from '../../../assets/images/users.svg'
 import {Box, Grid, Typography} from "@mui/material";
-import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
     const {profile, status, updateUserStatus} = props
@@ -19,7 +19,7 @@ const ProfileInfo = (props) => {
                     {profile.fullName}
                 </Typography>
             </Box>
-            <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
+            <ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus}/>
             <Grid container>
 
                 <Box className={classes.descriptionBlock}>
