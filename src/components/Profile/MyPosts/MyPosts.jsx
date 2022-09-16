@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
 import ReduxForm from "redux-form/lib/reduxForm";
@@ -8,7 +8,7 @@ import {TextArea} from "../../common/FormsControls/FormsControls";
 
 const maxLength10 = maxLengthCreator(10)
 
-export const MyPosts = (props) => {
+export const MyPosts = memo(props => {
 
     let postElements = props.postData.map(post =>
         <Post
@@ -29,7 +29,7 @@ export const MyPosts = (props) => {
                 {postElements}
             </div>
         </div>)
-}
+});
 
 const AddPostForm = (props) => {
     return (
