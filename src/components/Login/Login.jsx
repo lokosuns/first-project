@@ -9,13 +9,13 @@ import {Navigate} from "react-router-dom";
 import styles from "./Login.module.css"
 
 const Login = (props) => {
-
+    const {login, isAuth} = props
     const onSubmit = (formData) => {
         console.log(formData)
-        props.login(formData.email, formData.password, formData.rememberMe)
+        login(formData.email, formData.password, formData.rememberMe)
     }
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Navigate to={'/profile/25432'}/>
     }
 
@@ -26,8 +26,9 @@ const Login = (props) => {
 }
 
 const LoginForm = (props) => {
+    const {handleSubmit, error} = props
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field
                     placeholder={"Email"}
@@ -46,13 +47,17 @@ const LoginForm = (props) => {
                 />
             </div>
             <div>
-                <Field type={"checkbox"} name={'rememberMe'} component={Input}/>
+                <Field
+                    type={"checkbox"}
+                    name={'rememberMe'}
+                    component={Input}
+                />
             </div>
             <div>
                 <button>Login</button>
             </div>
-            {props.error && <div className={styles.formSummaryError}>
-                {props.error}
+            {error && <div className={styles.formSummaryError}>
+                {error}
             </div>}
         </form>
     )
@@ -62,8 +67,8 @@ const LoginReduxForm = ReduxForm({
     form: 'login'
 })(LoginForm)
 
-const mapStateToProps = (props) => ({
-    isAuth: props.auth.isAuth
+const mapStateToProps = ({auth}) => ({
+    isAuth: auth.isAuth
 })
 
 export default connect(mapStateToProps, {login})(Login)

@@ -14,31 +14,44 @@ import {
 } from "../../redux/users-selectors";
 
 class UsersContainer extends React.Component {
-
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        const {requestUsers, currentPage, pageSize} = this.props
+
+        requestUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize)
+        const {requestUsers, pageSize} = this.props
+        requestUsers(pageNumber, pageSize)
     }
 
     render() {
-
+        const {
+            isLoading,
+            usersPageCount,
+            pageSize,
+            currentPage,
+            users,
+            unfollow,
+            follow,
+            followingInProgress
+        } = this.props
         return (
-            <>{this.props.isLoading ?
-                <Preloader/>
-                :
-                <Users
-                    usersPageCount={this.props.usersPageCount}
-                    pageSize={this.props.pageSize}
-                    currentPage={this.props.currentPage}
-                    onPageChanged={this.onPageChanged}
-                    users={this.props.users}
-                    unfollow={this.props.unfollow}
-                    follow={this.props.follow}
-                    followingInProgress={this.props.followingInProgress}
-                />}
+            <>
+                {isLoading ?
+                    <Preloader/>
+                    :
+                    <Users
+                        usersPageCount={usersPageCount}
+                        pageSize={pageSize}
+                        currentPage={currentPage}
+                        onPageChanged={this.onPageChanged}
+                        users={users}
+                        unfollow={unfollow}
+                        follow={follow}
+                        followingInProgress={followingInProgress}
+                    />
+                }
             </>
         )
     }
@@ -54,29 +67,6 @@ let mapStateToProps = (state) => {
         followingInProgress: getFollowingInProgress(state),
     }
 }
-
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (userId) => {
-//             dispatch(followActionCreator(userId))
-//         },
-//         unfollow: (userId) => {
-//             dispatch(unfollowActionCreator(userId))
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsersActionCreator(users))
-//         },
-//         setCurrentPage: (pageNumber) => {
-//             dispatch(setCurrentPageActionCreator(pageNumber))
-//         },
-//         setTotalUsersCount: (totalCount) => {
-//             dispatch(setTotalUsersCountActionCreator(totalCount))
-//         },
-//         toggleIsLoading: (isLoading) => {
-//             dispatch(toggleIsLoadingActionCreator(isLoading))
-//         },
-//     }
-// }
 
 export default compose(
     connect(mapStateToProps, {
