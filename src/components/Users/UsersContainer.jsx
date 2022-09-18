@@ -42,7 +42,7 @@ class UsersContainer extends React.Component {
                     <Preloader/>
                     :
                     <Users
-                        usersPageCount={usersPageCount}
+                        totalItemCount={usersPageCount}
                         pageSize={pageSize}
                         currentPage={currentPage}
                         onPageChanged={this.onPageChanged}

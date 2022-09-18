@@ -1,26 +1,42 @@
 import styles from "./paginator.module.css"
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 
 const Paginator = (props) => {
-    const {usersPageCount, pageSize, currentPage, onPageChanged} = props
+    const {totalItemCount, pageSize, currentPage, onPageChanged, portionSize = 10} = props
 
-    let pagesCount = Math.ceil(usersPageCount / pageSize)
+    const pagesCount = Math.ceil(totalItemCount / pageSize)
 
-    let pages = []
+    const pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
-        if (i === 20) break;
+        // if (i === 20) break;
     }
 
+    useEffect(() => setPortionNumber(Math.ceil(currentPage/portionSize)), [currentPage])
+
+    const portionCount = Math.ceil(pagesCount / portionSize)
+    const [portionNumber, setPortionNumber] = useState(1)
+    const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
+    const rightPortionPageNumber = portionNumber * portionSize
+
     return <>
-        {pages.map((page, index) => <span
-            key={index}
-            className={currentPage === page && styles.selectedPage}
-            onClick={(e) => {
-                onPageChanged(page)
-            }}>{page}</span>
-        )}
+        {portionNumber > 1 && <button onClick={() => {
+            setPortionNumber(portionNumber - 1)
+        }}>Назад</button>}
+        {pages
+            .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
+            .map((page, index) => {
+                return <span
+                    key={index}
+                    className={currentPage === page && styles.selectedPage}
+                    onClick={(e) => {
+                        onPageChanged(page)
+                    }}>{page}</span>
+            })}
+        {portionCount > portionNumber && <button onClick={() => {
+            setPortionNumber(portionNumber + 1)
+        }}>Вперед</button>}
     </>
 }
 
