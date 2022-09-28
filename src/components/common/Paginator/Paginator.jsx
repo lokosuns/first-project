@@ -1,5 +1,6 @@
 import styles from "./paginator.module.css"
 import React, {useEffect, useState} from "react";
+import cn from "classnames";
 
 
 const Paginator = (props) => {
@@ -10,7 +11,6 @@ const Paginator = (props) => {
     const pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
-        // if (i === 20) break;
     }
 
     useEffect(() => setPortionNumber(Math.ceil(currentPage/portionSize)), [currentPage])
@@ -29,7 +29,7 @@ const Paginator = (props) => {
             .map((page, index) => {
                 return <span
                     key={index}
-                    className={currentPage === page && styles.selectedPage}
+                    className={ cn ({[styles.selectedPage]: currentPage === page},styles.pageNumber)}
                     onClick={(e) => {
                         onPageChanged(page)
                     }}>{page}</span>
